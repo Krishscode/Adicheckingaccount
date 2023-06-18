@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adi's Balance</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    .container {
+      margin-top: 50px;
+    }
+    
+    h2 {
+      margin-bottom: 20px;
+    }
+    
+    .balance {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      margin-right: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Checking Account</h2>
+    <div class="balance" id="balance">Balance: $0</div>
+    <div>
+      <input type="number" id="amount" placeholder="Enter amount" min="0" step="0.01">
+      <button class="btn" onclick="deposit()">Deposit</button>
+      <button class="btn" onclick="withdraw()">Withdraw</button>
+    </div>
+  </div>
+
+  <script>
+   
+    let balance = parseFloat(localStorage.getItem('balance')) || 0;
+    updateBalance();
+
+    function deposit() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      if (!isNaN(amount) && amount > 0) {
+        balance += amount;
+        updateBalance();
+      }
+    }
+
+    function withdraw() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      if (!isNaN(amount) && amount > 0 && amount <= balance) {
+        balance -= amount;
+        updateBalance();
+      }
+    }
+
+    function updateBalance() {
+      document.getElementById('balance').textContent = 'Balance: $' + balance.toFixed(2);
+      document.getElementById('amount').value = '';
+
+      localStorage.setItem('balance', balance);
+    }
+  </script>
+</body>
+</html>
