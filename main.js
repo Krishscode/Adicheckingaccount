@@ -11,7 +11,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   const password = document.getElementById("password").value;
 
 
-  if (password === "mypassword") {
+  if (password === "Krish*101") {
     localStorage.setItem("loggedIn", "true");
     showBalance();
   } else {
